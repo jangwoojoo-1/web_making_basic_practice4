@@ -8,13 +8,13 @@
 
     <loggers>
         <logger name="org.springframework" level="INFO" additivity="false">
-            <appender-ref ref="console" />
+            <appender-ref ref="CONSOLE" />
         </logger>
         <logger name="com.ssg" level="INFO" additivity="false">
-            <appender-ref ref="console"/>
+            <appender-ref ref="CONSOLE"/>
         </logger>
         <logger name="com.ssg.todoservice.mapper" level="TRACE" additivity="false">
-            <appender-ref ref="console"/>
+            <appender-ref ref="CONSOLE"/>
         </logger>
         <root level="INFO" additivity="false">
             <AppenderRef ref="CONSOLE"/>
