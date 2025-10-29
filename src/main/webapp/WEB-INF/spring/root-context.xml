@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://mybatis.org/schema/mybatis-spring
+       http://mybatis.org/schema/mybatis-spring.xsd">
+
+    <!--       <bean class="com.ssg.springwebmvc.sample.SampleDAO"></bean>-->
+    <!--       <bean class="com.ssg.springwebmvc.sample.SampleService"></bean>-->
+    <!--       <bean class="com.ssg.springwebmvc.sample.Chef"></bean>-->
+    <!--       <bean class="com.ssg.springwebmvc.sample.Restaurant"></bean>-->
+    <context:component-scan base-package="com.ssg.todoservice"/>
+
+
+
+    <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/memberdb?serverTimezone=Asia/Seoul"></property>
+        <property name="username" value="root"></property>
+        <property name="password" value="mysql1234"></property>
+        <property name="dataSourceProperties">
+            <props>
+                <prop key="cachePrepStmts">true</prop>
+                <prop key="prepStmtCacheSize">250</prop>
+                <prop key="prepStmtCacheSqlLimit">2048</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+        <constructor-arg ref="hikariConfig"/>
+    </bean>
+
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- @Transactional 활성화 -->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+
+    <!--    매퍼인터페이스 등록-->
+    <mybatis:scan base-package="com.ssg.todoservice.mapper"></mybatis:scan>
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--        mappers 폴더밑에 폴더가 있어도 상관없고 mappers/**/  *.xml 은 이름에 상관없는 xml 파일-->
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:/mappers/**/*.xml"></property>
+    </bean>
+
+    <context:component-scan base-package="com.ssg.todoservice.config"/>
+    <context:component-scan base-package="com.ssg.todoservice.service"/>
+</beans>
+

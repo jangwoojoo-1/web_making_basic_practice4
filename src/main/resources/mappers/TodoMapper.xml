@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssg.todoservice.mapper.TodoMapper">
+
+    <resultMap id="todoResultMap" type="com.ssg.todoservice.domain.TodoVO">
+        <id property="tno"    column="tno"/>
+        <result property="title"   column="title"/>
+        <result property="writer"  column="writer"/>
+        <result property="finished" column="finished"/>
+        <result property="dueDate"  column="dueDate" jdbcType="DATE" javaType="java.time.LocalDate"/>
+    </resultMap>
+
+    <select id="getTime" resultType="string">
+        select now()
+    </select>
+
+    <insert id="insert" parameterType="com.ssg.todoservice.domain.TodoVO">
+        insert into todo(title, dueDate,writer) values (#{title},
+        #{dueDate, jdbcType=DATE, javaType=java.time.LocalDate}, #{writer})
+    </insert>
+
+    <select id="selectAll" resultMap="todoResultMap">
+        select tno, title, writer, finished, dueDate
+        from todo
+        order by tno
+    </select>
+
+    <select id="selectOne" resultType="com.ssg.todoservice.domain.TodoVO">
+        select * from todo where tno = #{tno}
+    </select>
+
+    <delete id="delete">
+        delete from todo where tno=#{tno}
+    </delete>
+
+    <update id="update">
+        update todo set title=#{title}, dueDate=#{dueDate}, finished=#{finished} where tno=#{tno}
+    </update>
+
+</mapper>
