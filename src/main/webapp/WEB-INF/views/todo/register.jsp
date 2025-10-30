@@ -67,6 +67,7 @@
                                 <div class="float-end">
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                     <button type="reset" class="btn btn-secondary">Reset</button>
+                                    <button type="button" class="btn btn-list">List</button>
                                 </div>
                             </div>
                         </form>
@@ -82,6 +83,15 @@
                             </c:forEach>
 
                             console.log(serverValidResult)
+
+                            document.querySelector(".btn-list").addEventListener("click",function(e) {
+
+                                e.preventDefault()
+                                e.stopPropagation()
+
+                                self.location= `/todo/list`
+
+                            },false);
 
                         </script>
 

@@ -18,8 +18,6 @@
     <!--       <bean class="com.ssg.springwebmvc.sample.Restaurant"></bean>-->
     <context:component-scan base-package="com.ssg.todoservice"/>
 
-
-
     <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
         <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/memberdb?serverTimezone=Asia/Seoul"></property>
