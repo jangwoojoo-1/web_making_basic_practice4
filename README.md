@@ -138,7 +138,7 @@ JUnit 5와 Spring Test Context Framework를 사용하여 Service, DAO, Mapper �
       * 아래 SQL을 실행하여 `tbl_todo` 테이블을 생성합니다. (기본 구조는 `TodoVO` 클래스 및 `TodoMapper.xml` 참고)
 
         ```sql
-        CREATE TABLE tbl_todo (
+        CREATE TABLE todo (
             tno INT AUTO_INCREMENT PRIMARY KEY COMMENT 'TODO 번호',
             title VARCHAR(100) NOT NULL COMMENT '제목',
             dueDate DATE NOT NULL COMMENT '마감일',
