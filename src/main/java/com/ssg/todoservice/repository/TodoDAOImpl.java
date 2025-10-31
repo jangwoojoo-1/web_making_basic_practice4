@@ -1,6 +1,8 @@
 package com.ssg.todoservice.repository;
 
 import com.ssg.todoservice.domain.TodoVO;
+import com.ssg.todoservice.dto.PageRequestDTO;
+import com.ssg.todoservice.dto.PageResponseDTO;
 import com.ssg.todoservice.mapper.TodoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -35,5 +37,15 @@ public class TodoDAOImpl implements TodoDAO{
     @Override
     public void update(TodoVO todoVO) {
         todoMapper.update(todoVO);
+    }
+
+    @Override
+    public List<TodoVO> selectList(PageRequestDTO pageRequestDTO) {
+        return todoMapper.selectList(pageRequestDTO);
+    }
+
+    @Override
+    public int getCount(PageRequestDTO pageRequestDTO) {
+        return todoMapper.getCount(pageRequestDTO);
     }
 }

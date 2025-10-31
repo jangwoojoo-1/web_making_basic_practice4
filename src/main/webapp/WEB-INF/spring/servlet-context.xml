@@ -18,7 +18,9 @@
 <!--conVersionService 빈을 등록 한 후 스프링MVC처리를 위해 <mvc:annotation-driven/> 지정해야 한다.-->
     <mvc:annotation-driven conversion-service="conversionService"/>
 
-    <mvc:resources mapping="/resources/**" location="/resources/"/>
+    <mvc:resources mapping="/resources/**" location="classpath:/static/"/>
+<!--    <mvc:resources mapping="/resources/**" location="/resources/"/>-->
+
     <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <property name="formatters">
             <set>
